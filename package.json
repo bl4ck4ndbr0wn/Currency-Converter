@@ -1,0 +1,25 @@
+{
+  "name": "currency-converter",
+  "version": "1.0.0",
+  "description": "a front-end application that takes advantage of the functionalities Freecurrencyconverterapi provides. The application is able convert one currency to another while offline or online.",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bl4ck4ndbr0wn/Currency-Converter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bl4ck4ndbr0wn/Currency-Converter/issues"
+  },
+  "homepage": "https://github.com/bl4ck4ndbr0wn/Currency-Converter#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
