@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+
+    <title>Currency Converter &mdash; Your all-in-one currency converter app</title>
+</head>
+
+<body>
+    <div id="header-wrapper">
+        <div id="header" class="container">
+            <div id="menu">
+                <ul>
+                    <li class="current_page_item">
+                        <a href="#" title="">Homepage</a>
+                    </li>
+                    <li>
+                        <a href="#" title="">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#" title="">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="logo">
+                <h1>
+                    <a href="#">Currency Converter</a>
+                </h1>
+                <span>Input an amount and select the currency option to convert
+                </span>
+            </div>
+            <div class="form-container">
+                <form autocomplete="off" id="form" name='converter'>
+                    <h1 id="message">Get Started</h1>
+                    <small id="smallMessage" class="valid"> </small>
+                    <div class="field">
+                        <input type="text" name="amount" placeholder="Amount" id="amount" autocomplete="off" class="" />
+                        <label for="amount">Amount</label>
+                    </div>
+                    <div class="field">
+                        <select id="currency" name="currency-Type">
+                            <option selected="" value="Default">(Please select a Currency)</option>
+                            <option value="AF">Australia</option>
+                            <option value="AL">Canada</option>
+                            <option value="DZ">India</option>
+                            <option value="AS">Russia</option>
+                            <option value="AD">USA</option>
+                        </select>
+                        <label for="currency">Currency</label>
+                    </div>
+                    <button id="submit">Convert for Free</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="title">
+            <h2>Get in touch</h2>
+            <span class="more-info">For more info</span>
+        </div>
+        <ul class="contact">
+            <li>
+                <a href="" class="icon icon-twitter">
+                    <span>Twitter</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="icon icon-facebook">
+                    <span>Facebook</span>
+                </a>
+            </li>
+        </ul>
+        <p>&copy; Andela Learning Community (ALC) #7DaysofCodeChallenge
+            <p>Mobile Web Specialist Track. All rights reserved.</p>
+            <p>|</p>
+            Photos by
+            <a href="http://google.com/">Google</a> | Design by
+            <a href="http://github.com/bl4ck4ndbr0wn" rel="nofollow">Alpha Ng'ang'a Ndirangu</a>.
+        </p>
+    </div>
+
+    <script src="scripts/bundle.js"></script>
+
+</body>
+
+</html>
