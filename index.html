@@ -44,15 +44,16 @@
                         <label for="amount">Amount</label>
                     </div>
                     <div class="field">
-                        <select id="currency" name="currency-Type">
-                            <option selected="" value="Default">(Please select a Currency)</option>
-                            <option value="AF">Australia</option>
-                            <option value="AL">Canada</option>
-                            <option value="DZ">India</option>
-                            <option value="AS">Russia</option>
-                            <option value="AD">USA</option>
+                        <select id="fromCurrency" name="fromCurrency">
+                            <option selected="" value="Default">(From Currency)</option>
                         </select>
-                        <label for="currency">Currency</label>
+                        <label for="currency">From</label>
+                    </div>
+                    <div class="field">
+                        <select id="toCurrency" name="toCurrency">
+                            <option selected="" value="Default">(To Currency)</option>
+                        </select>
+                        <label for="currency">To</label>
                     </div>
                     <button id="submit">Convert for Free</button>
                 </form>
