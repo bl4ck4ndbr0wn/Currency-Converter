@@ -1,34 +1,45 @@
-/**
- * Gulpfile to make my life easier.
- */
-
 var gulp = require("gulp");
+var connect = require("gulp-connect");
 var browserify = require("browserify");
 var babelify = require("babelify");
 var source = require("vinyl-source-stream");
-var gutil = require("gulp-util");
 
-// Lets bring es6 to es5 with this.
-// Babel - converts ES6 code to ES5 - however it doesn't handle imports.
-// Browserify - crawls your code for dependencies and packages them up
-// into one file. can have plugins.
-// Babelify - a babel plugin for browserify, to make browserify
-// handle es6 including imports.
-gulp.task("es6", function() {
-  browserify({
-    entries: "./app.js",
-    debug: true
-  })
+gulp.task("connect", function() {
+  connect.server({
+    base: "http://localhost",
+    port: 9000,
+    root: "./dist",
+    livereload: true
+  });
+});
+
+gulp.task("js", function() {
+  browserify("./src/js/app.js")
     .transform(babelify)
-    .on("error", gutil.log)
     .bundle()
-    .on("error", gutil.log)
     .pipe(source("bundle.js"))
-    .pipe(gulp.dest(""));
+    .pipe(gulp.dest("./dist/scripts"))
+    .pipe(connect.reload());
+});
+
+gulp.task("html", function() {
+  gulp
+    .src("./src/*.html")
+    .pipe(gulp.dest("./dist"))
+    .pipe(connect.reload());
+});
+
+gulp.task("css", function() {
+  gulp
+    .src("./src/css/*.css")
+    .pipe(gulp.dest("./dist/css"))
+    .pipe(connect.reload());
 });
 
 gulp.task("watch", function() {
-  gulp.watch("**/*.js", { debounceDelay: 5000 }, ["es6"]);
+  gulp.watch("./src/**/*.js", ["js"]);
+  gulp.watch("./src/*.html", ["html"]);
+  gulp.watch("./src/css/*.css", ["css"]);
 });
 
-gulp.task("default", ["watch"]);
+gulp.task("default", ["js", "html", "css", "connect", "watch"]);

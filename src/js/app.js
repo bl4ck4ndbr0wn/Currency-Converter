@@ -81,10 +81,11 @@
 //   });
 // };
 
-import Settings from "./js/Settings";
+import Settings from "./Settings";
 
 const form = document.querySelector("form");
 const message = document.getElementById("message");
+const smallMessage = document.getElementById("smallMessage");
 
 const input = document.querySelector("input");
 const selectf = document.querySelector("select");
@@ -94,11 +95,21 @@ const settings = new Settings(input, selectf);
 
 const app = () => {
   input.addEventListener("input", () => {
-    settings.onValidate();
-    settings.onChange();
+    const error = settings.onChange(input.value);
+    const notification = err => {
+      if (err) {
+        smallMessage.innerHTML = err;
+        input.className = "invalid";
+      } else {
+        smallMessage.innerHTML = "";
+        input.className = "";
+      }
+    };
+
+    notification(error);
   });
   selectf.addEventListener("click", () => {
-    settings.onSubmit();
+    settings.onChange();
   });
   submitBtn.addEventListener("click", event => {
     form.innerHTML =

@@ -6,22 +6,23 @@ a front-end application that takes advantage of the functionalities Freecurrency
 
 ### devDependencies are the npm packages that are needed during development:
 
-- webpack leads to webpack being installed locally.
-- webpack-dev-server adds a hot-reloading development web server to webpack.
-- copy-webpack-plugin is a webpack plugin that copies files to the build directory.
-- babel-loader enables webpack to transpile JavaScript via Babel. This package internally imports a few core Babel packages (babel-core etc.).
-
 - babel-preset-es2015 is a Babel preset for compiling ES6 to plain ES5.
+- babelify
+- browserify
+- gulp
+- gulp-babel
+- gulp-concat
+- gulp-connect
+- vinyl-source-stream
+- watchify
 
 ### scripts specifies several ways in which you can run webpack:
 
-- Build once:
-  `npm run build`
+To run the code just run:
 
-* Watch files continuously, rebuild incrementally whenever one of them changes:
+```
+npm install
+gulp
+```
 
-`npm run watch`
-
-- Hot reloading via the webpack development server:
-  `npm start` (a shortcut for npm run start)
-  Go to `http://localhost:8080/`. The page reloads automatically when there are changes.
+The results are shown in the browser's console.

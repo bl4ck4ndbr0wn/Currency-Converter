@@ -293,6 +293,16 @@ form select:focus {
   outline: 0;
   border: 6px solid #185a7c;
 }
+
+form input.invalid{
+  border: 6px solid #F25F41;
+}
+form input.invalid:focus {
+  color: #185a7c;
+  font-weight: bold;
+  outline: 0;
+  border: 6px solid #185a7c;
+}
 form input::-webkit-input-placeholder {
   opacity: 1;
   transition: inherit;
