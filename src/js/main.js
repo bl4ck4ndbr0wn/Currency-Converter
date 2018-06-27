@@ -1,3 +1,11 @@
+/**
+ * Currency-Converter - Design Components in CSS, JS and HTML
+ * @version v1.2.1
+ * @license Apache-2.0
+ * @copyright 2015 Google, Inc.
+ * @link https://github.com/bl4ck4ndbr0wn/Currency-Converter
+ */
+
 // const form = document.querySelector("form");
 // const message = document.getElementById("message");
 //
@@ -81,40 +89,9 @@
 //   });
 // };
 
-import Settings from "./Settings";
+import ConvertForm from "./components/ConvertForm";
 
-const form = document.querySelector("form");
-const message = document.getElementById("message");
-const smallMessage = document.getElementById("smallMessage");
+const convertForm = new ConvertForm();
 
-const input = document.querySelector("input");
-const selectf = document.querySelector("select");
-const submitBtn = document.getElementById("submit");
-
-const settings = new Settings(input, selectf);
-
-const app = () => {
-  input.addEventListener("input", () => {
-    const error = settings.onChange(input.value);
-    const notification = err => {
-      if (err) {
-        smallMessage.innerHTML = err;
-        input.className = "invalid";
-      } else {
-        smallMessage.innerHTML = "";
-        input.className = "";
-      }
-    };
-
-    notification(error);
-  });
-  selectf.addEventListener("click", () => {
-    settings.onChange();
-  });
-  submitBtn.addEventListener("click", event => {
-    form.innerHTML =
-      '<h1>Good job!!</h1><p class="success-message">The amount is 123432.</p>';
-  });
-};
-
-app();
+convertForm.onChange();
+convertForm.onSubmit();

@@ -26,3 +26,8 @@ gulp
 ```
 
 The results are shown in the browser's console.
+
+## License
+
+Apache 2.0  
+Copyright 2018 Alpha Nganga Ndirangu
