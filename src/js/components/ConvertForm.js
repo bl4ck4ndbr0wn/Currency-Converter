@@ -1,6 +1,7 @@
 import { Component } from "./app";
 import { ConvertNodesElements } from "./FormElements";
-import api from "./../api/api";
+import api from "../api";
+import render from "./Render";
 
 class ConvertForm extends Component {
   constructor() {
@@ -25,6 +26,14 @@ class ConvertForm extends Component {
     });
   }
 
+  getAllCurrencies() {
+    api.get("/currencies").then(response => {
+      render.listCurrencies(response);
+    });
+  }
+
+  getAllCountries() {}
+
   onSubmit() {
     const errors = { ...this.state.errors };
     this.elements.submit.addEventListener("click", e => {
@@ -32,9 +41,7 @@ class ConvertForm extends Component {
       console.log(this.state.data);
       api
         .getAmount("/convert?q=", this.state.data)
-        .then(res => {
-          return res.json();
-        })
+        .then(res => {})
         .then((err, amount) => {
           console.log(amount);
         });

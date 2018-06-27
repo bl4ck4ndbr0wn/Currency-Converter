@@ -93,5 +93,8 @@ import ConvertForm from "./components/ConvertForm";
 
 const convertForm = new ConvertForm();
 
+convertForm.getAllCurrencies();
+convertForm.getAllCountries();
+
 convertForm.onChange();
 convertForm.onSubmit();
