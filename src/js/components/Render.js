@@ -23,14 +23,20 @@ class Render extends Component {
       el.add(opt, null);
     });
   }
+  compute(resp, data) {
+    console.log(Object.values(resp)[0], data);
+  }
 
   listCurrencies(result) {
     const data = { ...this.state.data };
     Object.entries(result.results).map(val => {
       /*
-      "currencyName": "Albanian Lek",
-      "currencySymbol": "Lek",
-      "id": "ALL"
+      data = {
+        "currencyName": "Albanian Lek",
+        "currencySymbol": "Lek",
+        "id": "ALL"
+      }
+
       */
       this.setState({
         data: {
@@ -38,7 +44,6 @@ class Render extends Component {
         }
       });
       this.onChange();
-      console.log(this.state.data);
     });
   }
 }

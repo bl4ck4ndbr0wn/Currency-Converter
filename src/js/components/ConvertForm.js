@@ -36,15 +36,22 @@ class ConvertForm extends Component {
 
   onSubmit() {
     const errors = { ...this.state.errors };
-    this.elements.submit.addEventListener("click", e => {
+    const { submit } = this.elements;
+
+    submit.addEventListener("click", e => {
       e.preventDefault();
-      console.log(this.state.data);
-      api
-        .getAmount("/convert?q=", this.state.data)
-        .then(res => {})
-        .then((err, amount) => {
-          console.log(amount);
-        });
+      let fr = this.state.data.fromCurrency;
+      let to = this.state.data.toCurrency;
+      let amount = this.state.data.amount;
+
+      // https://free.currencyconverterapi.com/api/v5/convert?q=HUF_BND&compact=ultra
+
+      const URI = `/convert?q=${fr}_${to}&compact=ultra`;
+
+      api.get(URI).then(response => {
+        // render.listCurrencies(response);
+        render.compute(response, amount);
+      });
     });
   }
 }

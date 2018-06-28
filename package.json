@@ -8,12 +8,9 @@
     "build": "webpack --config webpack.config.js",
     "serve": "concurrently \"npm run build\" \"npm run start\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bl4ck4ndbr0wn/Currency-Converter.git"
-  },
+  "repository": "git+https://github.com/bl4ck4ndbr0wn/Currency-Converter.git",
   "keywords": [],
-  "author": "",
+  "author": "bl4ck4ndbr0wn <ju5tu5.qu35t@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bl4ck4ndbr0wn/Currency-Converter/issues"
@@ -26,6 +23,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "live-server": "^1.2.0",
+    "lodash": "^4.17.10",
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.7"
   },
