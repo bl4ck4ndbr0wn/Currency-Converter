@@ -1,5 +1,5 @@
 import { Component } from "./app";
-import { CurrencySelection } from "./FormElements";
+import { select_elements, table_elements } from "./Elements";
 
 class Render extends Component {
   constructor() {
@@ -10,8 +10,10 @@ class Render extends Component {
       countries: {}
     };
 
-    this.elements = CurrencySelection();
-    this.listCurrencies = this.listCurrencies.bind(this);
+    this.elements = select_elements();
+    this.table = table_elements();
+    this.onChange = this.onChange.bind(this);
+    // this.createTable = this.createTable.bind(this);
   }
   onChange() {
     const data = { ...this.state.data };
@@ -23,21 +25,20 @@ class Render extends Component {
       el.add(opt, null);
     });
   }
-  compute(resp, data) {
-    console.log(Object.values(resp)[0], data);
-  }
-
+  //   compute(resp, data) {
+  //     console.log(Object.values(resp)[0], data);
+  //   }
+  /*
+    data = {
+    "currencyName": "Albanian Lek",
+    "currencySymbol": "Lek",
+    "id": "ALL"
+    }
+    */
   listCurrencies(result) {
     const data = { ...this.state.data };
+    console.log(result);
     Object.entries(result.results).map(val => {
-      /*
-      data = {
-        "currencyName": "Albanian Lek",
-        "currencySymbol": "Lek",
-        "id": "ALL"
-      }
-
-      */
       this.setState({
         data: {
           ...val[1]
@@ -46,6 +47,27 @@ class Render extends Component {
       this.onChange();
     });
   }
+  //   createTable() {
+  //     const countries = { ...this.state.countries };
+  //     for (const [key, value] of Object.entries(countries)) {
+  //       console.log(`${key} ${value}`);
+  //       const table = this.table;
+  //     }
+  //     console.log(countries);
+  //   }
+  //   listCountries(result) {
+  //     const countries = { ...this.state.countries };
+  //     console.log(result.results);
+  //     Object.entries(result.results).map(val => {
+  //       this.setState({
+  //         countries: {
+  //           ...val[1]
+  //         }
+  //       });
+  //       this.createTable();
+  //       console.log(this.state.countries);
+  //     });
+  //   }
 }
 
 const render = new Render();
