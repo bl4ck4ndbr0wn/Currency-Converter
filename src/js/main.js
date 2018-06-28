@@ -7,18 +7,9 @@
  */
 
 import Forms from "./components/Form";
+import onLoadSWAsync from "./sw";
 
-async function onLoadSWAsync() {
-  //Install the service worker
-  if ("serviceWorker" in navigator) {
-    try {
-      let serviceWorker = await navigator.serviceWorker.register("/sw.js");
-      console.log(`Service worker registered ${serviceWorker}`);
-    } catch (err) {
-      console.error(`Failed to register service worker: ${err}`);
-    }
-  }
-}
+// Service Workers
 onLoadSWAsync();
 
 //  Initializing the classes
