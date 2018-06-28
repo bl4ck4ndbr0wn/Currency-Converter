@@ -5,25 +5,36 @@
 #F3DEC5
 #F25F41
 */
+:root {
+  --bp-largest: 75em; /* 120.0rem */
+  --bp-large: 68.75em; /* 110.0rem */
+  --bp-medium: 56.25em; /* 90.0rem */
+  --bp-small: 37.5em; /* 60.0rem */
+  --bp-smallest: 31.25em; /* 50.0rem */
+}
 * {
+  margin: 0;
+  padding: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-html,
-body {
-  height: 100%;
-  font-s
+  font-size: 62.5%; /* 1rem = 1.0rem, 1.0rem/1.6rem = 62.5% */
 }
 
 body {
-  margin: 0px;
-  padding: 0px;
   background: #333333;
   font-family: "Open Sans", sans-serif;
-  font-size: 12pt;
   font-weight: 400;
+  line-height: 1.6;
   color: #000000;
+
+  min-height: 100vh;
 }
 
 h1,
@@ -42,8 +53,8 @@ a:hover {
 }
 
 .container {
-  margin: 0px auto;
-  width: 120%;
+  margin: 0 auto;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -53,7 +64,6 @@ a:hover {
 }
 
 #header-wrapper {
-  padding: 1em 0em;
   background-image: linear-gradient(
       to right bottom,
       rgba(103, 116, 100, 0.8),
@@ -63,6 +73,7 @@ a:hover {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  height: 100vh;
 }
 
 #menu {
@@ -79,15 +90,23 @@ a:hover {
 #menu li a,
 #menu li span {
   display: inline-block;
-  margin-left: 0.5em;
-  padding: 1em 1.5em;
-  letter-spacing: 0.2em;
+  margin-left: 0.5rem;
+  padding: 1rem 1.5rem;
+  letter-spacing: 0.2rem;
   text-decoration: none;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
   outline: 0;
   color: #fff;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  #menu li a,
+  #menu li span {
+    margin-left: 0rem;
+    font-size: 1rem;
+  }
 }
 
 #menu li:hover a,
@@ -97,17 +116,17 @@ a:hover {
 
 #menu .current_page_item a {
   background: #ff6816;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   color: #fff;
 }
 
 #logo {
-  padding: 3em 0em;
+  padding: 3rem 0;
   text-align: center;
 }
 
 #logo h1 {
-  font-size: 3.5em;
+  font-size: 3.5rem;
 }
 
 #logo a {
@@ -116,24 +135,24 @@ a:hover {
 }
 
 #logo span {
-  letter-spacing: 0.1em;
+  letter-spacing: 0.1rem;
   text-transform: uppercase;
-  font-size: 0.9em;
+  font-size: 1.7rem;
   color: rgba(255, 255, 255, 0.5);
 }
 
 #footer {
   overflow: hidden;
-  padding: 2em 0em;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem 0rem;
+  border-top: 0.1rem solid rgba(255, 255, 255, 0.08);
   text-align: center;
 }
 
 #footer p {
-  letter-spacing: 0.2em;
+  letter-spacing: 0.2rem;
   text-align: center;
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.3);
 }
 
@@ -142,25 +161,25 @@ a:hover {
   color: rgba(255, 255, 255, 0.7);
 }
 .title {
-  margin-bottom: 3em;
+  margin-bottom: 3rem;
 }
 
 .title h2 {
-  font-size: 2.8em;
+  font-size: 2.8rem;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .title .more-info {
-  letter-spacing: 0.15em;
+  letter-spacing: 0.15rem;
   text-transform: uppercase;
   font-weight: 400;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   color: #6f6f6f;
 }
 
 ul.contact {
   margin: 0;
-  padding: 0em 0em 3em 0em;
+  padding: 0rem 0rem 3rem 0rem;
   list-style: none;
 }
 
@@ -190,14 +209,14 @@ ul.contact li a:before {
 }
 
 .form-container {
-  width: 400px;
+  width: 50rem;
 }
 
 form {
   display: flex;
   flex-direction: column;
   background: transparent;
-  max-width: 320px;
+  min-width: 30%;
   padding: 2rem 2rem 2rem 2rem;
   position: relative;
   z-index: 1;
@@ -215,7 +234,7 @@ form::before {
   background: transparent;
   -webkit-transform: translateX(-3.5rem) translateY(-3.75rem);
   transform: translateX(-3.5rem) translateY(-3.75rem);
-  border: 6px solid #185a7c;
+  border: 0.6rem solid #185a7c;
 }
 form::after {
   background: #91baa3;
@@ -227,13 +246,13 @@ form h1 {
   text-align: center;
   margin: 0 0 0.25rem 0;
   padding: 0;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
 }
 form small {
   display: block;
   margin: 0 auto 1rem;
   padding: 0;
-  font-size: 14px;
+  font-size: 1.5rem;
 }
 form:focus-within {
   background: #91baa3;
@@ -241,8 +260,8 @@ form:focus-within {
 form:focus-within::before {
   width: 0%;
   height: 0%;
-  -webkit-transform: translatex(0px) translatey(0px);
-  transform: translatex(0px) translatey(0px);
+  -webkit-transform: translatex(0rem) translatey(0rem);
+  transform: translatex(0rem) translatey(0rem);
 }
 form .field {
   display: flex;
@@ -259,16 +278,16 @@ form label {
   opacity: 0;
 }
 form input {
-  padding: 10px 20px;
-  border: 4px solid white;
+  padding: 1rem 2rem;
+  border: 0.4rem solid white;
   margin: 0 1.5rem;
   background-color: transparent !important;
   -webkit-appearance: none;
   color: white;
 }
 form select {
-  padding: 10px 20px;
-  border: 4px solid white;
+  padding: 1rem 2rem;
+  border: 0.4rem solid white;
   margin: 0 1.5rem;
   background-color: #185a7c;
   -webkit-appearance: none;
@@ -276,7 +295,7 @@ form select {
 }
 form input:-webkit-autofill {
   background-color: transparent !important;
-  -webkit-box-shadow: 0 0 0px 1000px #91baa3 inset;
+  -webkit-box-shadow: 0 0 0rem 100rem #91baa3 inset;
   -webkit-text-fill-color: white !important;
 }
 form input::placeholder {
@@ -286,22 +305,22 @@ form input:focus {
   color: #185a7c;
   font-weight: bold;
   outline: 0;
-  border: 6px solid #185a7c;
+  border: 0.6rem solid #185a7c;
 }
 form select:focus {
   font-weight: bold;
   outline: 0;
-  border: 6px solid #185a7c;
+  border: 0.6rem solid #185a7c;
 }
 
-form input.invalid{
-  border: 6px solid #F25F41;
+form input.invalid {
+  border: 0.6rem solid #f25f41;
 }
 form input.invalid:focus {
   color: #185a7c;
   font-weight: bold;
   outline: 0;
-  border: 6px solid #185a7c;
+  border: 0.6rem solid #185a7c;
 }
 form input::-webkit-input-placeholder {
   opacity: 1;
@@ -315,21 +334,21 @@ form select:focus::-webkit-input-placeholder {
 }
 form button {
   border: none;
-  padding: 0.85rem 1rem;
-  margin-top: 2rem;
+  padding: 1.3rem 1rem;
+  margin-top: 3rem;
   background-color: #185a7c;
   color: white;
-  font-size: 0.75rem;
+  font-size: 1.4rem;
   text-transform: uppercase;
   width: 65%;
   position: absolute;
-  bottom: -20px;
+  bottom: -2rem;
   right: 18%;
   letter-spacing: 0.15em;
   transition: all 0.3s ease;
 }
 form button:hover {
-  border: 6px solid #061a3e;
+  border: 0.6rem solid #061a3e;
 }
 form p {
   font-size: 0.75rem;
@@ -341,4 +360,24 @@ form p.success-message {
   text-align: center;
   line-height: 2rem;
   margin: 1.5rem auto 5rem auto;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
 }
