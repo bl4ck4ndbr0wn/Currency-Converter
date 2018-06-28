@@ -1,0 +1,25 @@
+{
+  "name": "Currency Converter",
+  "short_name": "CConverter",
+  "description":
+    "a front-end application that takes advantage of the functionalities Freecurrencyconverterapi provides. The application is able convert one currency to another while offline or online.",
+  "lang": "en-US",
+  "start_url": "/",
+  "scope": "/index.html",
+  "display": "fullscreen",
+  "theme_color": "#1abc9c",
+  "icons": [
+    {
+      "src": "./img/logo-64.png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "./img/logo-128.png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "./img/logo-512.png",
+      "sizes": "512x512"
+    }
+  ]
+}

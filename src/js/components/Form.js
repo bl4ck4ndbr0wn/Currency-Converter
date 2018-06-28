@@ -13,7 +13,7 @@ class Forms extends Component {
     };
     this.elements = form_elements();
     this.onChange = this.onChange.bind(this);
-    // this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     // this.getAllCountries = this.getAllCountries.bind(this);
   }
 

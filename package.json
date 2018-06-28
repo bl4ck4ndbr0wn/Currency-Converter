@@ -4,7 +4,7 @@
   "description": "a front-end application that takes advantage of the functionalities Freecurrencyconverterapi provides. The application is able convert one currency to another while offline or online.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch & live-server dist/",
+    "start": "webpack --watch & live-server --port=3000 --host=192.168.0.150 dist/",
     "build": "webpack --config webpack.config.js",
     "serve": "concurrently \"npm run build\" \"npm run start\""
   },
