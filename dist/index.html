@@ -52,24 +52,25 @@
                 <div class="converter-form">
                     <form id="converter">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="amount" placeholder="0.0">
+                            <input name="amount" type="text" class="form-control" id="amount" placeholder="0.0">
                             <p class="help-block">Amount should not be greater than 50 characters in length</p>
                         </div>
                         <div class="form-group">
-                            <select id="fromCurrency" class="form-control">
+                            <select id="fromCurrency" class="form-control" name="fromCurrency">
                                 <option>Select Currency</option>
                             </select>
                         </div>
                         <p>To</p>
                         <div class="form-group">
-                            <select id="toCurrency" class="form-control">
+                            <select id="toCurrency" name="toCurrency" class="form-control">
                                 <option>Select Currency</option>
                             </select>
                         </div>
-                        <button id="submit" type="submit" class="btn btn-primary btn-lg btn-block">Convert</button>
+                        <button name="submit" id="submit" type="submit" class="btn btn-primary btn-lg btn-block">Convert</button>
 
                         <div class="form-group form-group-lg" style="margin-top:3rem">
-                            <input class="form-control" type="text" id="formGroupInputLarge" placeholder="0.0">
+                            <input class="form-control" type="text" id="results" placeholder="0.0" disabled>
+                            <p id="conversion" class="help-block text-info"></p>
                         </div>
                     </form>
                 </div>

@@ -25,9 +25,19 @@ class Render extends Component {
       el.add(opt, null);
     });
   }
-  //   compute(resp, data) {
-  //     console.log(Object.values(resp)[0], data);
-  //   }
+
+  compute(resp, data) {
+    console.log(Object.values(resp)[0], data);
+    const nodes = document.forms.converter;
+    const convertion = document.getElementById("conversion");
+    const { results } = nodes.elements;
+    const currency = Object.values(resp)[0];
+    // Compute
+    const culculate = currency * data;
+    //Display Results
+    results.value = culculate;
+    convertion.innerText = `Convertion Rate was ${currency}`;
+  }
   /*
     data = {
     "currencyName": "Albanian Lek",

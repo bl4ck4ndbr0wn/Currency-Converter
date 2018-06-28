@@ -43,12 +43,9 @@ class Forms extends Component {
     const errors = { ...this.state.errors };
     const { submit } = this.elements;
 
-    const { fromCurrency, toCurrency, amount } = { ...this.state.data };
-    console.log(fromCurrency, toCurrency, amount);
     submit.addEventListener("click", e => {
       e.preventDefault();
-
-      console.log(fromCurrency, toCurrency, amount);
+      const { fromCurrency, toCurrency, amount } = { ...this.state.data };
       // https://free.currencyconverterapi.com/api/v5/convert?q=HUF_BND&compact=ultra
 
       const URI = `/convert?q=${fromCurrency}_${toCurrency}&compact=ultra`;
