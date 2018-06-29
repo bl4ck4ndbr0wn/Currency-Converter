@@ -1,6 +1,9 @@
-importScripts("/cache-polyfill.js");
+// importScripts("/cache-polyfill.js");
 
-CACHE_NAME = "CC_V1";
+const version = "0.1";
+CACHE_NAME = `CC-V${version}`;
+
+// Installing resources to cache
 
 self.addEventListener("install", e => {
   e.waitUntil(
@@ -8,9 +11,24 @@ self.addEventListener("install", e => {
       return cache.addAll([
         "/",
         "/index.html",
-        "/scripts/bundle.js",
-        "/css/style.css"
+        "/css/style.css",
+        "/css/vendor/bootstrap.min.css",
+        "/scripts/vendor/bootstrap.min.js",
+        "/scripts/vendor/jquery.min.js",
+        "/scripts/bundle.js"
       ]);
+    })
+  );
+});
+
+// Intercept the web page requests
+self.addEventListener("fetch", event => {
+  console.log(event.request.url);
+  //Eveluate the results of the event in the future.
+  event.respondWith(
+    //match current web request with cached resouces.(URL string)
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
     })
   );
 });
