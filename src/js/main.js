@@ -7,10 +7,6 @@
  */
 
 import Forms from "./components/Form";
-import onLoadSWAsync from "./sw";
-
-// Service Workers
-onLoadSWAsync();
 
 //  Initializing the classes
 const forms = new Forms();
