@@ -1,7 +1,7 @@
 import { Component } from "./app";
 import { select_elements, table_elements } from "./Elements";
 
-class Render extends Component {
+export default class Render extends Component {
   constructor() {
     super();
     this.state = {
@@ -78,7 +78,3 @@ class Render extends Component {
   //     });
   //   }
 }
-
-const render = new Render();
-
-export default render;

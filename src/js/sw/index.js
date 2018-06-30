@@ -1,4 +1,4 @@
-const version = "0.6";
+const version = "0.7";
 const staticCacheName = `CC-V${version}`;
 
 // Installing resources to cache.....
