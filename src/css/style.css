@@ -5,7 +5,7 @@
   --color-primary-ligh-grey: #f5f6f7
 
   --color-white: #fff;
-  --color-grey: #555555;
+  --color-grey: #555;
 }
 html {
   font-size: 62.5%; /* 1rem = 10px, 10px/16px = 62.5% */
@@ -58,5 +58,46 @@ p {font-size: 1.6rem;}
   background: #fff;
   margin: 1rem auto;
   padding: 5rem;
-  border-radius: 5px;
+  border-radius: .5rem;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+#notification{
+  visibility: hidden;
+  min-width: 25.0rem;
+  margin-left: -12.5rem;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: .2rem;
+  padding: 1.6rem;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 3.0rem
+}
+
+#notification.show{
+  visibility: visible;
+  -webkit-animation: fadein 0.5s;
+  animation: fadein 0.5s;
 }

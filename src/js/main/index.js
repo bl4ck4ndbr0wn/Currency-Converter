@@ -5,14 +5,13 @@
  * @copyright 2015 Google, Inc.
  * @link https://github.com/bl4ck4ndbr0wn/Currency-Converter
  */
-
-import Forms from "./components/Form";
+import Forms from "./../components/Form";
 
 //  Initializing the classes
 const forms = new Forms();
 
 //Forms functions
 forms.getAllCurrencies();
-
+// Form events
 forms.onChange();
 forms.onSubmit();
