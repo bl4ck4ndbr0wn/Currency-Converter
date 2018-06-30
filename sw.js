@@ -1,34 +1,53 @@
-// importScripts("/cache-polyfill.js");
+const version = "0.5";
+const staticCacheName = `CC-V${version}`;
 
-const version = "0.1";
-CACHE_NAME = `CC-V${version}`;
-
-// Installing resources to cache
-
-self.addEventListener("install", e => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
+// Installing resources to cache.....
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(staticCacheName).then(cache => {
       return cache.addAll([
         "/",
         "/index.html",
         "/css/style.css",
         "/css/vendor/bootstrap.min.css",
-        "/scripts/vendor/bootstrap.min.js",
-        "/scripts/vendor/jquery.min.js",
-        "/scripts/bundle.js"
+        "/fonts/google-font.css",
+        "/js/vendor/bootstrap.min.js",
+        "/js/vendor/jquery.min.js",
+        "/js/bundle.js"
       ]);
+    })
+  );
+});
+
+self.addEventListener("activate", event => {
+  //Remove old cache
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames
+          .filter(cacheName => {
+            return cacheName.startsWith("CC-V") && cacheName != staticCacheName;
+          })
+          .map(cacheName => {
+            return cache.delete(cacheName);
+          })
+      );
     })
   );
 });
 
 // Intercept the web page requests
 self.addEventListener("fetch", event => {
-  console.log(event.request.url);
-  //Eveluate the results of the event in the future.
   event.respondWith(
-    //match current web request with cached resouces.(URL string)
     caches.match(event.request).then(response => {
       return response || fetch(event.request);
     })
   );
+});
+
+// Update response to message event.
+self.addEventListener("message", event => {
+  if (event.data.action === "skipWaiting") {
+    self.skipWaiting();
+  }
 });
