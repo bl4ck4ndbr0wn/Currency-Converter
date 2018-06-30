@@ -1,4 +1,4 @@
-# Currency-Converter
+# Currency-Converter [![Build Status](https://travis-ci.org/bl4ck4ndbr0wn/Currency-Converter.svg?branch=master)](https://travis-ci.org/bl4ck4ndbr0wn/Currency-Converter)
 
 a front-end application that takes advantage of the functionalities Freecurrencyconverterapi provides. The application is able convert one currency to another while offline or online.
 

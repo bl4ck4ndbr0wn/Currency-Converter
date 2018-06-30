@@ -4,6 +4,7 @@
   "description": "a front-end application that takes advantage of the functionalities Freecurrencyconverterapi provides. The application is able convert one currency to another while offline or online.",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "start": "live-server --port=3000 dist/",
     "build": "gulp build",
     "serve": "concurrently \"gulp\" \"npm run start\"",
@@ -43,6 +44,7 @@
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^5.0.0",
+    "jest": "^23.2.0",
     "path": "^0.12.7",
     "toaster-js": "^2.2.0",
     "vinyl-buffer": "^1.0.1",
