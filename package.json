@@ -6,7 +6,8 @@
   "scripts": {
     "start": "live-server --port=3000 dist/",
     "build": "gulp build",
-    "serve": "concurrently \"gulp\" \"npm run start\""
+    "serve": "concurrently \"gulp\" \"npm run start\"",
+    "deploy": "git push origin `git subtree split --prefix dist master`:gh-pages --force"
   },
   "repository": "git+https://github.com/bl4ck4ndbr0wn/Currency-Converter.git",
   "keywords": [],
