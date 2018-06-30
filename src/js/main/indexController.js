@@ -1,28 +1,5 @@
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./../sw.js").then(reg => {
-    console.log(`Service Worker Registered on scope ${reg.scope}`);
-    if (!navigator.serviceWorker.controller) {
-      return;
-    }
-
-    if (reg.waiting) {
-      _updateReady(reg.waiting);
-      return;
-    }
-
-    if (reg.installing) {
-      _trackInstalling(reg.installing);
-      return;
-    }
-
-    reg.addEventListener("updatefound", function() {
-      _trackInstalling(reg.installing);
-    });
-  });
-}
-
 // import api from "./../api";
-// import idb from "idb";
+const idb = window.indexedDB || window.mozIndexedDB;
 
 function openDatabase() {
   if (!navigator.serviceWorker) {
@@ -35,6 +12,40 @@ function openDatabase() {
     store.createIndex("currency", "countries");
   });
 }
+
+const registerServiceWorker = () => {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./../sw.js").then(reg => {
+      console.log(`Service Worker Registered on scope ${reg.scope}`);
+      if (!navigator.serviceWorker.controller) {
+        return;
+      }
+
+      if (reg.waiting) {
+        _updateReady(reg.waiting);
+        return;
+      }
+
+      if (reg.installing) {
+        _trackInstalling(reg.installing);
+        return;
+      }
+
+      reg.addEventListener("updatefound", function() {
+        _trackInstalling(reg.installing);
+      });
+    });
+
+    let refreshing;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (refreshing) return;
+      window.location.reload();
+      refreshing = true;
+    });
+  } else {
+    console.log("Service Worker is not supported by browser.");
+  }
+};
 
 const _trackInstalling = worker => {
   worker.addEventListener("statechange", () => {
@@ -53,5 +64,6 @@ const _updateReady = worker => {
     worker.postMessage({ action: "skipWaiting" });
   });
 };
-// Ensure refresh is only called once.
-// This works around a bug in "force update on reload".
+
+registerServiceWorker();
+openDatabase();
