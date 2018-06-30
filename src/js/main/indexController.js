@@ -1,58 +1,69 @@
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./../sw.js").then(reg => {
-    console.log(`Service Worker Registered on scope ${reg.scope}`);
+// import api from "./../api";
+const idb = window.indexedDB || window.mozIndexedDB;
+
+function openDatabase() {
+  if (!navigator.serviceWorker) {
+    return Promise.resolve();
+  }
+  return idb.open("CConverter", 1, upgradeDB => {
+    const store = upgradeDB.createObjectStore("CConverter", {
+      keyPath: "id"
+    });
+    store.createIndex("currency", "countries");
   });
 }
 
-// import api from "./../api";
-// import idb from "idb";
+const registerServiceWorker = () => {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./../sw.js").then(reg => {
+      console.log(`Service Worker Registered on scope ${reg.scope}`);
+      if (!navigator.serviceWorker.controller) {
+        return;
+      }
 
-// function openDatabase() {
-//   if (!navigator.serviceWorker) {
-//     return Promise.resolve();
-//   }
-//   return idb.open("CConverter", 1, upgradeDB => {
-//     const store = upgradeDB.createObjectStore("CConverter", {
-//       keyPath: "id"
-//     });
-//     store.createIndex("currency", "countries");
-//   });
-// }
+      if (reg.waiting) {
+        _updateReady(reg.waiting);
+        return;
+      }
 
-// const _trackInstalling = worker => {
-//   worker.addEventListener("statechange", () => {
-//     if (worker.state == "installed") {
-//       _updateReady();
-//     }
-//   });
-// };
+      if (reg.installing) {
+        _trackInstalling(reg.installing);
+        return;
+      }
 
-// const _updateReady = () => {
-//   let newWorker;
-//   const notification = document.getElementById("notification");
-//   notification.className = "show";
-//   // The click event on the pop up notification
-//   document.getElementById("reload").addEventListener("click", () => {
-//     navigator.serviceWorker.controller.postMessage({ action: "skipWaiting" });
-//   });
-// };
-// // Ensure refresh is only called once.
-// // This works around a bug in "force update on reload".
+      reg.addEventListener("updatefound", function() {
+        _trackInstalling(reg.installing);
+      });
+    });
 
-// //if no controller, page wasn't loaded via service worker, so its latest version.(exit early)
-// // if (!navigator.serviceWorker.controller) {
-// //   return;
-// // }
-// // //if worker is waiting call update ready
-// // if (reg.waiting) {
-// //   _updateReady();
-// // }
-// // //if worker is installing track progress
-// // if (reg.installing) {
-// //   _trackInstalling();
-// //   return;
-// // }
-// // //otherwise listen for new worker arriving.
-// // reg.addEventListener("updatefound", () => {
-// //   _trackInstalling(reg.installing);
-// // });
+    let refreshing;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (refreshing) return;
+      window.location.reload();
+      refreshing = true;
+    });
+  } else {
+    console.log("Service Worker is not supported by browser.");
+  }
+};
+
+const _trackInstalling = worker => {
+  worker.addEventListener("statechange", () => {
+    if (worker.state == "installed") {
+      _updateReady(worker);
+    }
+  });
+};
+
+const _updateReady = worker => {
+  let newWorker;
+  const notification = document.getElementById("notification");
+  notification.className = "show";
+  // The click event on the pop up notification
+  document.getElementById("reload").addEventListener("click", () => {
+    worker.postMessage({ action: "skipWaiting" });
+  });
+};
+
+registerServiceWorker();
+openDatabase();
