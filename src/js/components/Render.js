@@ -47,7 +47,6 @@ class Render extends Component {
     */
   listCurrencies(result) {
     const data = { ...this.state.data };
-    console.log(result);
     Object.entries(result.results).map(val => {
       this.setState({
         data: {
