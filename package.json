@@ -4,7 +4,6 @@
   "description": "a front-end application that takes advantage of the functionalities Freecurrencyconverterapi provides. The application is able convert one currency to another while offline or online.",
   "main": "index.js",
   "scripts": {
-    "test": "vows --spec",
     "start": "live-server --port=3000 dist/",
     "build": "gulp build",
     "serve": "concurrently \"gulp\" \"npm run start\"",
