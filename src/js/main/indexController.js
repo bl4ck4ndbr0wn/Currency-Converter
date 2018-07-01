@@ -1,18 +1,10 @@
-// import api from "./../api";
-const idb = window.indexedDB || window.mozIndexedDB;
+import Index from "./../idb";
 
-function openDatabase() {
-  if (!navigator.serviceWorker) {
-    return Promise.resolve();
-  }
-  return idb.open("CConverter", 1, upgradeDB => {
-    const store = upgradeDB.createObjectStore("CConverter", {
-      keyPath: "id"
-    });
-    store.createIndex("currency", "countries");
-  });
+function IndexController() {
+  const index = new Index();
+
+  index.openDatabase();
 }
-
 const registerServiceWorker = () => {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./../sw.js").then(reg => {
@@ -64,6 +56,5 @@ const _updateReady = worker => {
     worker.postMessage({ action: "skipWaiting" });
   });
 };
-
 registerServiceWorker();
-openDatabase();
+IndexController();

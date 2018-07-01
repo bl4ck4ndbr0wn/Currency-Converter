@@ -1,7 +1,7 @@
 import { Component } from "./app";
 import { select_elements, table_elements } from "./Elements";
 
-class Render extends Component {
+export default class Render extends Component {
   constructor() {
     super();
     this.state = {
@@ -24,6 +24,7 @@ class Render extends Component {
 
       el.add(opt, null);
     });
+    this.createTable(data, this.table.currencies);
   }
 
   compute(resp, data) {
@@ -56,29 +57,32 @@ class Render extends Component {
       this.onChange();
     });
   }
-  //   createTable() {
-  //     const countries = { ...this.state.countries };
-  //     for (const [key, value] of Object.entries(countries)) {
-  //       console.log(`${key} ${value}`);
-  //       const table = this.table;
-  //     }
-  //     console.log(countries);
-  //   }
-  //   listCountries(result) {
-  //     const countries = { ...this.state.countries };
-  //     console.log(result.results);
-  //     Object.entries(result.results).map(val => {
-  //       this.setState({
-  //         countries: {
-  //           ...val[1]
-  //         }
-  //       });
-  //       this.createTable();
-  //       console.log(this.state.countries);
-  //     });
-  //   }
+  createTable(data, element) {
+    // Create table element
+    const tbl = document.createElement("table");
+    // create rows
+    const row = document.createElement("tr");
+    for (const [key, value] of Object.entries(data)) {
+      console.log(`${key} ${value}`);
+      //Create cells in row
+      const cell = document.createElement("td");
+      const cellText = document.createTextNode(value);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+      tbl.appendChild(row);
+    }
+  }
+  listCountries(result) {
+    const countries = { ...this.state.countries };
+    console.log(result.results);
+    Object.entries(result.results).map(val => {
+      this.setState({
+        countries: {
+          ...val[1]
+        }
+      });
+      this.createTable(countries, this.table.countries);
+      console.log(this.state.countries);
+    });
+  }
 }
-
-const render = new Render();
-
-export default render;
