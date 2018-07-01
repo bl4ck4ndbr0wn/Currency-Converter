@@ -14,7 +14,9 @@ self.addEventListener("install", event => {
         "/js/vendor/bootstrap.min.js",
         "/js/vendor/jquery.min.js",
         "/js/bundle.min.js",
-        "/js/indexController.js"
+        "/js/indexController.js",
+        "/img/money.jpg",
+        "/img/logo.png"
       ]);
     })
   );
