@@ -34,11 +34,11 @@ class Forms extends Component {
     });
   }
 
-  // getAllCountries() {
-  //   api.get("/countries").then(response => {
-  //     // this.render.listCountries(response);
-  //   });
-  // }
+  getAllCountries() {
+    api.get("/countries").then(response => {
+      this.render.listCountries(response);
+    });
+  }
 
   onSubmit() {
     const errors = { ...this.state.errors };

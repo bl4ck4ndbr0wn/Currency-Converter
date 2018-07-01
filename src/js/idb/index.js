@@ -11,12 +11,16 @@ export default class Index extends Component {
       window.mozIndexedDB ||
       window.webkitIndexedDB ||
       window.msIndexedDB;
-    this.dbName = "CConverter";
+    this.DB_NAME = "CConverter";
+    this.DB_VERSION = 1;
+    this.DB_STORE_NAME = "CConverter";
   }
   // Create the schema
   openDatabase() {
     // If the browser doesn't support service worker,
     // we don't care about having a database
+    let db;
+    console.log("openDatabase");
     if (!navigator.serviceWorker) {
       return Promise.resolve();
     }
@@ -25,68 +29,84 @@ export default class Index extends Component {
         "Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available."
       );
     }
-    const dbPromise = this.indexDB.open(this.dbName, 2, upgradeDB => {
-      if (!upgradeDb.objectStoreNames.contains("currency")) {
-        upgradeDb.createObjectStore("currency", { keyPath: "id" });
-      }
-      if (!upgradeDb.objectStoreNames.contains("countries")) {
-        upgradeDb.createObjectStore("countries", { keyPath: "id" });
-      }
-      objectStore.createIndex("currency", "countries");
-    });
+    const dbPromise = this.indexDB.open(this.DB_NAME, this.DB_VERSION);
+
     console.log(dbPromise);
     dbPromise
       .then(db => {
-        const tx = db.transaction(this.dbName, "readwrite");
-        const store = tx.objectStore(this.store);
-        const item = {
-          id: 1,
-          name: "sandwichs",
-          price: 4.99,
-          description: "A very tasty sandwich",
-          created: new Date().getTime()
-        };
-        store.add({ ...item });
-        return tx.complete;
+        const store = getObjectStore(this.dbName, "readwrite");
+
+        // Add some data
+        api.get("/currencies").then(response => {
+          Object.entries(result.results).map(val => {
+            this.setState({
+              currencies: {
+                ...val[1]
+              }
+            });
+            this.onChange(store);
+          });
+        });
       })
       .then(() => {
         console.log("added item to the store os!");
       });
+
+    dbPromise.onupgradeneeded(event => {
+      console.log("dbPromise.onupgradeneeded");
+      const store = event.currentTarget.result.createObjectStore(
+        this.DB_STORE_NAME,
+        {
+          keyPath: "id"
+        }
+      );
+      store.createIndex("currency", "countries");
+    });
   }
 
-  _showCachedCurrencies = () => {
-    console.log("[Service Worker] showing cached images");
-    return this.openDatabase();
-  };
-
-  onChange() {
+  onChange(store) {
     const currencies = { ...this.state.currencies };
-    store.put(currencies);
+    store.add(currencies);
+
+    return tx.complete;
     console.log(currencies);
   }
-  putCurrencies() {
-    // Start a new transaction
-    const db = this.db.result;
-    const tx = db.transaction(this.dbName, "readwrite");
-    const store = tx.objectStore(this.dbName);
-    const index = store.index("currency");
-    console.log("Adding currencies");
-    // Add some data
-    api.get("/currencies").then(response => {
-      Object.entries(result.results).map(val => {
-        this.setState({
-          currencies: {
-            ...val[1]
-          }
-        });
-        this.onChange();
-      });
-    });
+  /**
+   * @param {string} store_name
+   * @param {string} mode either "readonly" or "readwrite"
+   */
+  getObjectStore(store_name, mode) {
+    var tx = db.transaction(store_name, mode);
+    return tx.objectStore(store_name);
+  }
 
-    // Query the data
-    // Close the db when the transaction is done
-    tx.onComplete = () => {
-      db.close();
+  clearObjectStore(store_name) {
+    const store = getObjectStore(this.DB_STORE_NAME, "readwrite");
+    const req = store.clear();
+    req.onsuccess = event => {
+      displayActionSuccess("Store cleared");
+      displayCurrList(store);
     };
+    req.onerror = event => {
+      console.error("clearObjectStore:", event.target.errorCode);
+      displayActionFailure(this.error);
+    };
+  }
+
+  getBlob(key, store, success_callback) {
+    const req = store.get(key);
+    req.onsuccess = function(event) {
+      const value = event.target.result;
+      if (value) success_callback(value.blob);
+    };
+  }
+
+  /**
+   * @param {IDBObjectStore=} store
+   */
+
+  _showCachedCurrencies() {
+    console.log("[Service Worker] showing cached images");
+    return this.openDatabase();
   }
 }

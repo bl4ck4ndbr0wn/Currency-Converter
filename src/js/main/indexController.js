@@ -2,9 +2,8 @@ import Index from "./../idb";
 
 function IndexController() {
   const index = new Index();
-  registerServiceWorker();
 
-  index._showCachedCurrencies();
+  index.openDatabase();
 }
 const registerServiceWorker = () => {
   if ("serviceWorker" in navigator) {
@@ -57,5 +56,5 @@ const _updateReady = worker => {
     worker.postMessage({ action: "skipWaiting" });
   });
 };
-
+registerServiceWorker();
 IndexController();
