@@ -1,4 +1,4 @@
-# Currency-Converter [![Build Status](https://travis-ci.org/bl4ck4ndbr0wn/Currency-Converter.svg?branch=master)](https://travis-ci.org/bl4ck4ndbr0wn/Currency-Converter)
+# Currency-Converter [![Build Status](https://travis-ci.org/bl4ck4ndbr0wn/Currency-Converter.svg?branch=master)](https://travis-ci.org/bl4ck4ndbr0wn/Currency-Converter) [![Coverage Status](https://coveralls.io/repos/github/bl4ck4ndbr0wn/Currency-Converter/badge.svg?branch=master)](https://coveralls.io/github/bl4ck4ndbr0wn/Currency-Converter?branch=master) [ ![Codeship Status for bl4ck4ndbr0wn/Currency-Converter](https://app.codeship.com/projects/dbe23f90-5edd-0136-4ff8-223437260ab1/status?branch=master)](https://app.codeship.com/projects/296086)
 
 a front-end application that takes advantage of the functionalities Freecurrencyconverterapi provides. The application is able convert one currency to another while offline or online.
 
