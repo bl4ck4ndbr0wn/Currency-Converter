@@ -1,7 +1,7 @@
 import { Component } from "./app";
 import { form_elements } from "./Elements";
 import api from "../api";
-import render from "./Render";
+import Render from "./Render";
 
 class Forms extends Component {
   constructor() {
@@ -11,6 +11,7 @@ class Forms extends Component {
       isValid: false,
       errors: {}
     };
+    this.render = new Render();
     this.elements = form_elements();
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -29,15 +30,15 @@ class Forms extends Component {
 
   getAllCurrencies() {
     api.get("/currencies").then(response => {
-      render.listCurrencies(response);
+      this.render.listCurrencies(response);
     });
   }
 
-  // getAllCountries() {
-  //   api.get("/countries").then(response => {
-  //     // render.listCountries(response);
-  //   });
-  // }
+  getAllCountries() {
+    api.get("/countries").then(response => {
+      this.render.listCountries(response);
+    });
+  }
 
   onSubmit() {
     const errors = { ...this.state.errors };
@@ -51,7 +52,7 @@ class Forms extends Component {
       const URI = `/convert?q=${fromCurrency}_${toCurrency}&compact=ultra`;
 
       api.get(URI).then(response => {
-        render.compute(response, amount);
+        this.render.compute(response, amount);
       });
     });
   }
