@@ -4,6 +4,8 @@ A front-end application that takes advantage of the functionalities Freecurrency
 
 Freecurrencyconverterapi is an API that converts one currency to another and returns result in json format.
 
+![App screenshot](https://github.com/bl4ck4ndbr0wn/Currency-Converter/blob/master/src/images/CConverter.png)
+
 ### devDependencies are the npm packages that are needed during development:
 
 ### scripts specifies several ways in which you can run webpack:

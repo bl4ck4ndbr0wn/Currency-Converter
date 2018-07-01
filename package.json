@@ -4,8 +4,7 @@
   "description": "a front-end application that takes advantage of the functionalities Freecurrencyconverterapi provides. The application is able convert one currency to another while offline or online.",
   "main": "index.js",
   "scripts": {
-    "test1": "jest",
-    "test": "node ./src/tests/index.test.js",
+    "test": "jest",
     "coverage": "`npm bin`/istanbul cover ./src/tests/index.test.js",
     "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info",
     "start": "live-server --port=3000 dist/",
@@ -48,6 +47,7 @@
     "gulp-watch": "^5.0.0",
     "istanbul": "^0.4.5",
     "jest": "^23.2.0",
+    "mocha": "^5.2.0",
     "path": "^0.12.7",
     "toaster-js": "^2.2.0",
     "vinyl-buffer": "^1.0.1",
